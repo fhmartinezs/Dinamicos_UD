@@ -1,0 +1,60 @@
+Podemos usar ``apart(expr, x)`` para hacer una descomposición parcial de fracciones::
+
+
+    >>>  1/( (x+2)*(x+1) )
+           1
+    ───────────────
+    (2 + x)*(1 + x)
+
+    >>>  apart(1/( (x+2)*(x+1) ), x)
+      1          1
+    ─────── - ──────── 
+    1 + x      2 + x
+
+    >>>  (x+1)/(x-1)
+    -(1 + x)
+    ─────────
+     1 - x
+
+    >>>  apart((x+1)/(x-1), x)
+          2
+    1 - ──────
+        1 - x
+
+Para unirlas, podemos usar ``together(expr, x)``::
+
+    >>>  together(1/x + 1/y + 1/z)
+    x*y + x*z + y*z
+    ───────────────
+         x*y*z
+
+    >>> together(apart((x+1)/(x-1), x), x)
+    -1 - x
+    ───────
+     1 - x
+
+    >>> together(apart(1/( (x+2)*(x+1) ), x), x)
+           1
+    ───────────────
+(2 + x)*(1 + x)
+
+
+
+
+
+
+apart() performs a partial fraction decomposition on a rational function.
+
+>>> expr = (4*x**3 + 21*x**2 + 10*x + 12)/(x**4 + 5*x**3 + 5*x**2 + 4*x)
+>>> expr
+   3       2
+4⋅x  + 21⋅x  + 10⋅x + 12
+────────────────────────
+  4      3      2
+ x  + 5⋅x  + 5⋅x  + 4⋅x
+>>> apart(expr)
+ 2⋅x - 1       1     3
+────────── - ───── + ─
+ 2           x + 4   x
+x  + x + 1
+
